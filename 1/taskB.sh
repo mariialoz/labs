@@ -57,7 +57,7 @@ awk '{ print $4}' $file1 | cut -c 9-25 | sort |  uniq -c | tail -n1 | awk '{prin
 ;;
 6)
 echo "Search bots in example_log.log:"
-varbot=$(grep "[bB]ot/" $file1 | awk '{print $14, $15, $16}' | grep [bB]ot/ | sed 's/Linux x86_64; //g' | cut -d "/" -f1 | sort | uniq -c | awk '{print $2}')
+grep "[bB]ot/" $file1 | awk '{print $14, $15, $16}' | grep [bB]ot/ | sed 's/Linux x86_64; //g' | cut -d "/" -f1 | sort | uniq -c | awk '{print $2}'
 
 echo "Search bots in apache_logs.txt:"
 grep "[bB]ot/" $file2 | awk '{print $14, $15, $16}' | grep [bB]ot/ | sed 's/Linux x86_64; //g' | cut -d "/" -f1 | sort | uniq -c | awk '{print $2}'
