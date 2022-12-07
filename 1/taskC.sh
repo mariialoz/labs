@@ -1,6 +1,4 @@
 #!/bin/bash
-PATH=/home/maria/LinuxBash:/home/maria/.nvm/versions/node/v12.18.0/bin:/home/maria/.opam/coreboot/bin:/home/maria/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/maria/homework:/home/maria/LinuxBash
-
 
 sourced=$(pwd)/$1
 dest=$(pwd)/$2
@@ -9,14 +7,14 @@ for file in $(find $sourced -printf "%P\n") ; do
 	if [ -a $dest/$file ] ;
 	then 
 		if [ -N $sourced/$file ] ; then
-			echo "Newer $file detected. copying..."
+			echo "File $file was modified. copying..."
 			stat -c ‘%y’ $sourced/$file
 			cp -r $sourced/$file $dest/$file
 		else
-			echo "File $file exists. skipping."
+			echo "File $file exists already, skip"
 		fi
 	else
-		echo "$file is being copied over to $dest"
+		echo "New file $file is being copied over to $dest"
 		stat -c ‘%y’ $sourced/$file
 		cp -r $sourced/$file $dest/$file
 	fi
@@ -26,7 +24,7 @@ for file in $(find $dest -printf "%P\n") ; do
         then
 		continue
         else
-                echo "$file is being deleted from $source"
+                echo "$file is being deleted from $sourced"
 		stat -c ‘%y’ $sourced/$file
                 rm -r  $dest/$file
         fi
